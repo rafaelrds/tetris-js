@@ -10,6 +10,11 @@ class Piece {
         this.spawn();
     }
 
+    move(p) {
+        this.x = p.x;
+        this.y = p.y;
+    }
+
     spawn() {
         this.color = 'blue';
         this.shape = [
