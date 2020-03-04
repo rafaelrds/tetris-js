@@ -11,7 +11,7 @@ ctx.scale(BLOCK_SIZE, BLOCK_SIZE);
 moves = {
     [KEY.LEFT]: p => ({ ...p, x: p.x - 1 }),
     [KEY.RIGHT]: p => ({ ...p, x: p.x + 1 }),
-    [KEY.UP]: p => ({ ...p, y: p.y + 1 })
+    [KEY.DOWN]: p => ({ ...p, y: p.y + 1 })
 };
 
 
