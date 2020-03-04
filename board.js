@@ -11,9 +11,9 @@ class Board {
     return Array.from({ length: ROWS }, () => Array(COLS).fill(0));
   }
 
-  rotate(p) {
+  rotate(piece) {
     // Clone with JSON for immutability
-    let clone = JSON.parse(JSON.stringify(p));
+    let p = Object.assign({}, piece);
 
     // Transpose matrix, p is the Piece (rotation)
     for (let y = 0; y < p.shape.length; ++y) {
@@ -25,7 +25,7 @@ class Board {
     // Reverse the order of the columns.
     p.shape.forEach(row => row.reverse());
 
-    return clone;
+    return p;
   }
 
   valid(p) {
