@@ -15,13 +15,13 @@ class Piece {
         this.y = p.y;
     }
 
+    randomizeTetrominoType(noOfTypes) {
+        return Math.floor(Math.random() * noOfTypes);
+    }
+
     spawn() {
-        this.color = 'blue';
-        this.shape = [
-            [2, 0, 0],
-            [2, 2, 2],
-            [0, 0, 0]
-        ];
+        this.color = COLORS[this.randomizeTetrominoType(COLORS.length)];
+        this.shape = SHAPES[this.randomizeTetrominoType(SHAPES.length)];
 
         // Starting position.
         this.x = 3;
