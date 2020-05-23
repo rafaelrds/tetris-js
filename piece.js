@@ -10,13 +10,17 @@ class Piece {
     this.spawn();
   }
 
-  move(p) {
-    this.x = p.x;
-    this.y = p.y;
+  move(position) {
+    this.x = position.x;
+    this.y = position.y;
   }
 
   randomizeTetrominoType(noOfTypes) {
     return Math.floor(Math.random() * noOfTypes);
+  }
+
+  setStartingPosition() {
+    this.x = this.typeId === 4 ? 4 : 3;
   }
 
   spawn() {

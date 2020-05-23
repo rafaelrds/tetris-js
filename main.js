@@ -1,7 +1,30 @@
 const canvas = document.getElementById("board");
 const ctx = canvas.getContext("2d");
+const canvasNext = document.getElementById('next');
+const ctxNext = canvasNext.getContext('2d');
 let requestId;
 let time;
+
+let accountValues = {
+  score: 0,
+  level: 0,
+  lines: 0,
+};
+
+function updateAccount(key, value) {
+  let element = document.getElementById(key);
+  if (element) {
+    element.textContent = value;
+  }
+}
+
+let account = new Proxy(accountValues, {
+  set: (target, key, value) => {
+    target[key] = value;
+    updateAccount(key, value);
+    return true;
+  },
+});
 
 // Calculate size of canvas from constants.
 ctx.canvas.width = COLS * BLOCK_SIZE;
@@ -18,7 +41,7 @@ moves = {
   [KEY.UP]: (p) => board.rotate(p),
 };
 
-let board = new Board();
+let board = new Board(ctx, ctxNext);
 
 function play() {
   addEventListener();
@@ -39,13 +62,18 @@ function play() {
 
 function resetGame() {
   board.reset();
-  time = { start: 0, elapsed: 0 };
+  time = { start: 0, elapsed: 0, level: LEVEL[account.level] };
 }
 
 function animate(now = 0) {
   time.elapsed = now - time.start;
   if (time.elapsed > time.level) {
     time.start = now;
+
+    if (!board.drop()) {
+      gameOver();
+      return;
+    }
   }
 
   // Clear board before drawing new state.
