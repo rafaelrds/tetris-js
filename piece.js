@@ -28,7 +28,7 @@ class Piece {
     this.shape = SHAPES[this.randomizeTetrominoType(SHAPES.length)];
 
     // Starting position.
-    this.x = 3;
+    this.x = 0;
     this.y = 0;
   }
 

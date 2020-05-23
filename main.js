@@ -41,6 +41,15 @@ moves = {
   [KEY.UP]: (p) => board.rotate(p),
 };
 
+initNext();
+
+function initNext() {
+  // Calculate size of canvas from constants.
+  ctxNext.canvas.width = 4 * BLOCK_SIZE;
+  ctxNext.canvas.height = 4 * BLOCK_SIZE;
+  ctxNext.scale(BLOCK_SIZE, BLOCK_SIZE);
+}
+
 let board = new Board(ctx, ctxNext);
 
 function play() {

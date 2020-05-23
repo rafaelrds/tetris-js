@@ -44,7 +44,6 @@ class Board {
     return Array.from({ length: ROWS }, () => Array(COLS).fill(0));
   }
 
-
   rotate(piece) {
     // Clone with JSON for immutability
     let p = Object.assign({}, piece);
