@@ -1,5 +1,7 @@
 class Board {
   grid;
+  piece;
+  requestId;
 
   // Reset the board when we start a new game.
   reset() {
@@ -23,7 +25,7 @@ class Board {
     }
 
     // Reverse the order of the columns.
-    p.shape.forEach(row => row.reverse());
+    p.shape.forEach((row) => row.reverse());
 
     return p;
   }
@@ -37,6 +39,22 @@ class Board {
           this.isEmpty(value) ||
           (this.insideWalls(x) && this.aboveFloor(y) && this.notOccupied(x, y))
         );
+      });
+    });
+  }
+
+  draw() {
+    this.piece.draw();
+    this.drawBoard();
+  }
+
+  drawBoard() {
+    this.grid.forEach((row, y) => {
+      row.forEach((value, x) => {
+        if (value > 0) {
+          this.ctx.fillStyle = COLORS[value];
+          this.ctx.fillRect(x, y, 1, 1);
+        }
       });
     });
   }
