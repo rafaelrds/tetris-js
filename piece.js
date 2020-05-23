@@ -4,6 +4,8 @@ class Piece {
   color;
   shape;
   ctx;
+  typeId;
+  hardDropped;
 
   constructor(ctx) {
     this.ctx = ctx;
@@ -16,7 +18,7 @@ class Piece {
   }
 
   randomizeTetrominoType(noOfTypes) {
-    return Math.floor(Math.random() * noOfTypes);
+    return Math.floor(Math.random() * noOfTypes + 1);
   }
 
   setStartingPosition() {
@@ -24,12 +26,12 @@ class Piece {
   }
 
   spawn() {
-    this.color = COLORS[this.randomizeTetrominoType(COLORS.length)];
-    this.shape = SHAPES[this.randomizeTetrominoType(SHAPES.length)];
-
-    // Starting position.
+    this.typeId = this.randomizeTetrominoType(COLORS.length - 1);
+    this.shape = SHAPES[this.typeId];
+    this.color = COLORS[this.typeId];
     this.x = 0;
     this.y = 0;
+    this.hardDropped = false;
   }
 
   draw() {
