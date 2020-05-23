@@ -1,7 +1,7 @@
 const canvas = document.getElementById("board");
 const ctx = canvas.getContext("2d");
-const canvasNext = document.getElementById('next');
-const ctxNext = canvasNext.getContext('2d');
+const canvasNext = document.getElementById("next");
+const ctxNext = canvasNext.getContext("2d");
 let requestId;
 let time;
 
@@ -81,6 +81,15 @@ function animate(now = 0) {
 
   board.draw();
   requestId = requestAnimationFrame(animate);
+}
+
+function gameOver() {
+  cancelAnimationFrame(requestId);
+  ctx.fillStyle = "black";
+  ctx.fillRect(1, 3, 8, 1.2);
+  ctx.font = "1px Arial";
+  ctx.fillStyle = "red";
+  ctx.fillText("GAME OVER", 1.8, 4);
 }
 
 function addEventListener() {
